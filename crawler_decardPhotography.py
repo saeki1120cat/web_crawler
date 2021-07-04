@@ -23,4 +23,5 @@ time.sleep(3)
 driver.execute_script('var s = document.documentElement.scrollTop=5000')
 
 html = driver.execute_script("return document.getElementsByTagName('html')[0].outerHTML")
+
 print(html)
