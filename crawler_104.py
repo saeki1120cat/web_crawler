@@ -7,7 +7,6 @@ import json
 import re
 import datetime
 
-
 today=datetime.date.today()
 formatted_today=str(today.strftime('%y%m%d'))
 
