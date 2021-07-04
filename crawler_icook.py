@@ -97,7 +97,7 @@ urls = ['https://icook.tw/recipes/{}'.format(i) for i in range(id_star, id_end +
 
 icook_data = [] 
 try :    
-    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor: #進行多工處理
         executor.map(cook, urls)
     
     icook_df = pd.DataFrame(icook_data)    
