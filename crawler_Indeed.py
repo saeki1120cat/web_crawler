@@ -10,7 +10,7 @@ from fake_useragent import UserAgent
 
 keyword_str =str(input("キーワード"))
 country = str(input("勤務地"))
-page_num = int(input("請問您想抓取幾頁"))
+page_num = int(input("何ページのデータを取りたいですか"))
 
 url_A ='https://jp.indeed.com/jobs?q='+ keyword_str + '&l='+ country +'&start='
 
@@ -31,12 +31,12 @@ for i in range(0,page_num+1):
     res = requests.get(url, headers = headers)
     soup = BeautifulSoup(res.text, 'html.parser')   
     
-    jobs_b = soup.find_all('h2',class_='title')                        #搜尋所有職缺       
+    jobs_b = soup.find_all('h2',class_='title')                        #求人検索       
     jobs_c = soup.find_all("span", attrs={"class":["company"]})
     jobs_d = soup.find_all("span", attrs={"class":["location accessible-contrast-color-location"]})
 
     for bi in jobs_b:
-        job_name.append(bi.find('a',class_="jobtitle turnstileLink").text.replace("\n", ""))           #職缺內容
+        job_name.append(bi.find('a',class_="jobtitle turnstileLink").text.replace("\n", ""))           
         job_url.append('https://jp.indeed.com' + bi.find('a').get('href'))
 
     for ci in jobs_c:
@@ -47,9 +47,9 @@ for i in range(0,page_num+1):
         
     time.sleep(sleep_time)
         
-dict_job = {"職缺內容": job_name, "公司網址": job_url, "公司名稱": job_company, "公司地點": job_location}      
+dict_job = {"職種名": job_name, "URL": job_url, "会社名": job_company, "勤務地": job_location}      
 
 jobs_df = pd.DataFrame(dict_job)
 
 jobs_df.to_csv("indeedjob.csv")
-print("完成")
+print("完成しました")
