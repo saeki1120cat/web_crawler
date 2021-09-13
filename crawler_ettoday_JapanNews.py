@@ -7,7 +7,7 @@ import pandas as pd
 from fake_useragent import UserAgent
 import concurrent.futures
 
-def news_for_japan():
+def news_for_japan(url):
     news_Link = []
     news_Title = []
     news_Type = []
@@ -17,7 +17,7 @@ def news_for_japan():
     sleep_time = random.random()
     ua = UserAgent()
     headers = {'User-Agent': ua.random}
-    res = requests.get(url=urls, headers=headers)
+    res = requests.get(url, headers=headers)
     soup = BeautifulSoup(res.text, 'html.parser')
 
     for j in range(0, len(soup.select('div[class=box_2]'))):
